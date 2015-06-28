@@ -3,7 +3,6 @@ package security;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import models.CheckAuthTokenBO;
 import play.libs.F.Promise;
 import play.mvc.Action;
 import play.mvc.Http.Context;
@@ -23,14 +22,14 @@ public class CheckOAuthTokenAction extends Action<CheckOAuthToken> {
 			return Promise.pure(unauthorized("Wrong Authorization method."));
 		}
 		String authToken = getAuthToken(authorizationHeader);
-		CheckAuthTokenBO checkAuthTokenBO = checkTokenAuthentication(authToken);
+		CheckOAuthTokenBO checkAuthTokenBO = checkTokenAuthentication(authToken);
 		if (checkAuthTokenBO.getResponseCode() != 200) {
 			return Promise.pure(unauthorized(checkAuthTokenBO.getResponseBody()));
 		}
 		return delegate.call(ctx);
 	}
 	
-	private static CheckAuthTokenBO checkTokenAuthentication(String token) throws InterruptedException, ExecutionException, IOException {
+	private static CheckOAuthTokenBO checkTokenAuthentication(String token) throws InterruptedException, ExecutionException, IOException {
 		return OAuthService.checkTokenAuthentication(token);
 	}
 	

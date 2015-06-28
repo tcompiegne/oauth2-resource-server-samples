@@ -1,6 +1,6 @@
-package models;
+package security;
 
-public class CheckAuthTokenBO {
+public class CheckOAuthTokenBO {
 
 	private int responseCode;
 

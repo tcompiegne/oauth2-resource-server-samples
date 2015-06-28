@@ -3,12 +3,11 @@ package services;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import models.CheckAuthTokenBO;
-
 import org.apache.commons.codec.binary.Base64;
 
 import play.Play;
 import play.libs.ws.WS;
+import security.CheckOAuthTokenBO;
 
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClient.BoundRequestBuilder;
@@ -34,7 +33,7 @@ public class OAuthService {
 		return response.getResponseBody();
 	}
 	
-	public static CheckAuthTokenBO checkTokenAuthentication(String token) throws InterruptedException, ExecutionException, IOException {
+	public static CheckOAuthTokenBO checkTokenAuthentication(String token) throws InterruptedException, ExecutionException, IOException {
 		String binaryData = clientId+":"+clientSecret;
 		AsyncHttpClient client = (AsyncHttpClient) WS.client().getUnderlying();
 		BoundRequestBuilder req = client.preparePost(oauthUrl + "/oauth/check_token");
@@ -43,7 +42,7 @@ public class OAuthService {
 		req.addQueryParameter("token", token);
 
 		Response response = req.execute().get();
-		CheckAuthTokenBO checkAuthTokenBO = new CheckAuthTokenBO();
+		CheckOAuthTokenBO checkAuthTokenBO = new CheckOAuthTokenBO();
 		checkAuthTokenBO.setResponseCode(response.getStatusCode());
 		checkAuthTokenBO.setResponseBody(response.getResponseBody());
 		
