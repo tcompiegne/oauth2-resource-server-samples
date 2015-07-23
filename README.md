@@ -65,7 +65,7 @@ Response Body   ::
 Get User Todo list :
 
 =============== =================================================
-Request         GET /rest/todos/<username>
+Request         GET /rest/todos/|username|
 Header          Authorization   Bearer cb86832e-5c0f-4480-bcc9-be0daddd7725 (i.e your access token)
 Response Codes  200 OK
                 401 Unauthorized
@@ -119,13 +119,13 @@ Response Body   ::
 Delete Todo
 
 =============== =================================================
-Request         POST /rest/todos/<todo_id>/delete
+Request         POST /rest/todos/|todo_id|/delete
 Headers         Authorization   Bearer cb86832e-5c0f-4480-bcc9-be0daddd7725 (i.e your access token)
 Response Codes  200 OK
                 401 Unauthorized
 Response Body   ::
 
-                "Todo with id <todo_id> successfully deleted"
+                "Todo with id |todo_id| successfully deleted"
 
 =============== =================================================
 
