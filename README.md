@@ -116,6 +116,31 @@ Response Body   ::
 
 =============== =================================================
 
+Edit Todo
+
+=============== =================================================
+Request         POST /rest/todos/edit
+Headers         Authorization   Bearer cb86832e-5c0f-4480-bcc9-be0daddd7725 (i.e your access token)
+                Content-Type    application/json
+Request Body    ::
+
+                  {
+                    "id" : 4,
+                    "description" : "Todo 4 Fix"
+                  }
+                  
+Response Codes  200 OK
+                401 Unauthorized
+Response Body   ::
+
+                  {
+                      "id": 4,
+                      "description": "Todo 4 Fix",
+                      "username": "userTest"
+                  }
+
+=============== =================================================
+
 Delete Todo
 
 =============== =================================================
