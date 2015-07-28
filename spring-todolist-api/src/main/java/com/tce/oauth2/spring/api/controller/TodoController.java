@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tce.oauth2.spring.api.model.Todo;
+import com.tce.oauth2.spring.api.model.TodoResponse;
 import com.tce.oauth2.spring.api.repository.TodoRepository;
 
 /**
@@ -65,13 +66,18 @@ public class TodoController {
 
 	@RequestMapping(value = "/todos/edit", method = RequestMethod.POST)
 	public @ResponseBody Todo edit(@RequestBody Todo todo) {
-		return todoRepository.save(todo);
+		Todo todoToUpdate = todoRepository.findOne(todo.getId());
+		todoToUpdate.setDescription(todo.getDescription());
+		return todoRepository.save(todoToUpdate);
 	}
 
-	@RequestMapping(value = "/todos/{todoId}/delete", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody String delete(@PathVariable("todoId") Long id) {
+	@RequestMapping(value = "/todos/{todoId}/delete", method = RequestMethod.POST)
+	public @ResponseBody TodoResponse delete(@PathVariable("todoId") Long id) {
 		todoRepository.delete(id);
-		return "{ Todo with id " + id + " successfully deleted }";
+		TodoResponse todoResponse = new TodoResponse();
+		todoResponse.setStatus("OK");
+		todoResponse.setMessage("Todo with id " + id + " successfully deleted");
+		return todoResponse;
 	}
 
 }
