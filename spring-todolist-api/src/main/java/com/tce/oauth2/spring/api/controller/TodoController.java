@@ -68,10 +68,10 @@ public class TodoController {
 		return todoRepository.save(todo);
 	}
 
-	@RequestMapping(value = "/todos/{todoId}/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/todos/{todoId}/delete", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String delete(@PathVariable("todoId") Long id) {
 		todoRepository.delete(id);
-		return "Todo with id " + id + " successfully deleted";
+		return "{ Todo with id " + id + " successfully deleted }";
 	}
 
 }

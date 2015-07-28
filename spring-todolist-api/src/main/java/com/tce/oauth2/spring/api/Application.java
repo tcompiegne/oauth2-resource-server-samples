@@ -55,7 +55,7 @@ public class Application {
 		private Environment env;
 
 		public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-			resources.tokenServices(remoteTokenServices());
+			resources.tokenServices(remoteTokenServices()).resourceId("openid");
 		}
 
 		public void configure(HttpSecurity http) throws Exception {
