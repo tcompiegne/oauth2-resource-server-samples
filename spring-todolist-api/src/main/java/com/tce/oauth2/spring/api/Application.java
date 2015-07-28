@@ -23,8 +23,17 @@
  *******************************************************************************/
 package com.tce.oauth2.spring.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
 /**
  * 
@@ -36,5 +45,34 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+	}
+
+	@Configuration
+	@EnableResourceServer
+	public static class SecurityConfig implements ResourceServerConfigurer {
+
+		@Autowired
+		private Environment env;
+
+		public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+			resources.tokenServices(remoteTokenServices());
+		}
+
+		public void configure(HttpSecurity http) throws Exception {
+			http.authorizeRequests().antMatchers("/rest/**").access("#oauth2.hasScope('read')");
+		}
+
+		@Bean
+		public RemoteTokenServices remoteTokenServices() {
+			RemoteTokenServices s = new RemoteTokenServices();
+			s.setCheckTokenEndpointUrl(p("oauth.endpoint.check_token"));
+			s.setClientId(p("oauth.client.id"));
+			s.setClientSecret(p("oauth.client.secret"));
+			return s;
+		}
+
+		private String p(String key) {
+			return env.getProperty(key);
+		}
 	}
 }
