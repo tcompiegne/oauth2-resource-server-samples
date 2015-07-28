@@ -8,11 +8,11 @@ The [Authorization Server](https://github.com/tcompiegne/oauth2-server "Authoriz
 About TodoList OAuth 2 API
 =================================
 
-Retrieve your Todo List with the TodoList API.
+Retrieve and manage your Todo List with the TodoList API.
 
-The goal is to implement the same application (API RESTful) using different technologies to show you how you can protected your resources thanks to OAuth2.
+The goal is to implement the same application (API RESTful/Resource Server Provider) using different technologies to show you how you can protected your resources thanks to OAuth2.
 
-[OAuth 2 Client Apps](https://github.com/tcompiegne/oauth2-client-samples) are used to retrieve the data and [OAuth 2 Server](https://github.com/tcompiegne/oauth2-server) is used for the OAuth2 Authentication Server.
+[OAuth 2 Client Apps](https://github.com/tcompiegne/oauth2-client-samples) are used to retrieve the data and [OAuth 2 Server](https://github.com/tcompiegne/oauth2-server) is used for the OAuth2 Authorization Server.
 
 How to use it ?
 =================================
