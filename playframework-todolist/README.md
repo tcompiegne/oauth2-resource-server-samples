@@ -1,5 +1,4 @@
-# oauth2-usecase-play-todolist
-OAuth2 Todo list using Play Framework
+# OAuth2 Todo List API using Play Framework
 
 Use case to show you how to protect restricted resources via OAuth2 Protocol.
 
