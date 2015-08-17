@@ -3,11 +3,12 @@
 # ~~~~
 
 # REST
-GET		/rest/todos										controllers.RestTodo.findAll()
-GET		/rest/todos/:username					controllers.RestTodo.findByUsername(username: java.lang.String)
-POST  /rest/todos/add        				controllers.RestTodo.add()
-POST  /rest/todos/edit        			controllers.RestTodo.edit()
-POST  /rest/todos/:id/delete				controllers.RestTodo.delete(id: Long)
+OPTIONS /rest/*all                          controllers.Application.preflight(all)
+GET		/rest/todos							controllers.RestTodo.findAll()
+GET		/rest/todos/:username				controllers.RestTodo.findByUsername(username: java.lang.String)
+POST    /rest/todos/add        				controllers.RestTodo.add()
+POST    /rest/todos/edit        			controllers.RestTodo.edit()
+POST    /rest/todos/:id/delete				controllers.RestTodo.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
